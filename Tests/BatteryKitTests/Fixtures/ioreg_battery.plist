@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Product</key>
+		<string>Magic Trackpad</string>
+		<key>DeviceAddress</key>
+		<string>a0-78-17-e2-b9-b4</string>
+		<key>BatteryPercent</key>
+		<integer>53</integer>
+		<key>HasBattery</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>Product</key>
+		<string>AirPods Pro</string>
+		<key>DeviceAddress</key>
+		<string>bb-11-22-33-44-55</string>
+		<key>BatteryPercentLeft</key>
+		<integer>80</integer>
+		<key>BatteryPercentRight</key>
+		<integer>72</integer>
+		<key>BatteryPercentCase</key>
+		<integer>95</integer>
+	</dict>
+</array>
+</plist>

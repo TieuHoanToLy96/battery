@@ -1,0 +1,8 @@
+.build/
+*.app/
+.DS_Store
+.swiftpm/
+
+# OMC operational artifacts (keep project skills)
+.omc/
+!.omc/skills/

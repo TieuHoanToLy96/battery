@@ -1,0 +1,35 @@
+{
+  "SPBluetoothDataType": [
+    {
+      "device_connected": [
+        {
+          "Magic Keyboard": {
+            "device_address": "AA-BB-CC-DD-EE-01",
+            "device_batteryLevelMain": "85%",
+            "device_minorType": "Keyboard"
+          }
+        },
+        {
+          "AirPods Pro": {
+            "device_address": "AA-BB-CC-DD-EE-02",
+            "device_batteryLevelLeft": "70%",
+            "device_batteryLevelRight": "65%",
+            "device_batteryLevelCase": "90%"
+          }
+        },
+        {
+          "Old Mouse": {
+            "device_address": "AA-BB-CC-DD-EE-03"
+          }
+        }
+      ],
+      "device_not_connected": [
+        {
+          "Some Speaker": {
+            "device_address": "AA-BB-CC-DD-EE-09"
+          }
+        }
+      ]
+    }
+  ]
+}
