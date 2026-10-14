@@ -14,8 +14,12 @@ pin còn lại** dựa trên lịch sử sử dụng 7 ngày.
 - ⏱️ Ước lượng "Còn ~Xh Ym đến {ngưỡng}%" từ tốc độ xả trung bình 7 ngày.
   Tự loại đoạn đang sạc và đoạn ngắt kết nối khỏi phép tính.
 - ⚙️ Ngưỡng cảnh báo chỉnh được (10/15/20/25/30%), lưu lại.
-- 📈 Bấm vào thẻ thiết bị để mở cửa sổ lịch sử pin, chọn 24 giờ hoặc 7 ngày.
-  Biểu đồ tự cập nhật; ngắt đường khi không có mẫu trong hơn 10 phút.
+- 🎵 Tìm & phát nhạc YouTube ngay trong popover:
+  - Ô "Tìm trên YouTube…" tìm video không cần API key (parse trang kết quả).
+  - Bấm kết quả để phát: thay URL tab YouTube đang mở trong Chrome (không
+    kéo Chrome lên trước); nếu chưa có tab YouTube thì mở tab mới.
+  - Điều khiển trình phát: bài trước/sau, lặp lại (loop), và EQ
+    (Web Audio) áp trực tiếp lên video.
 
 ## Yêu cầu
 
@@ -39,6 +43,23 @@ chọn ngưỡng, làm mới, hoặc thoát.
 > Lần đầu chạy, macOS có thể hỏi quyền gửi thông báo — hãy cho phép để nhận
 > cảnh báo pin thấp.
 
+## Điều khiển YouTube trên Chrome
+
+Phát video (thay URL tab YouTube) chỉ cần quyền **Automation** điều khiển
+Chrome. Nhưng các thao tác **bài trước/sau, lặp lại (loop) và EQ** chạy bằng
+JavaScript qua Apple Events — mặc định Chrome **tắt** tính năng này, nên cần
+bật thủ công một lần:
+
+1. Mở **Google Chrome**.
+2. Vào menu **View → Developer → Allow JavaScript from Apple Events**
+   (bật dấu tích).
+3. Lần đầu điều khiển, macOS sẽ hỏi cấp quyền **Automation** cho app điều
+   khiển Chrome — chọn **OK**. (Có thể kiểm tra/bật lại tại
+   *System Settings → Privacy & Security → Automation*.)
+
+Nếu không bật, phát video vẫn chạy nhưng next/prev/loop/EQ sẽ không có tác
+dụng.
+
 ## Test
 
 ```bash
@@ -47,8 +68,11 @@ swift test
 
 ## Cách hoạt động
 
-- Mỗi 60s chạy `system_profiler SPBluetoothDataType -json`, parse thiết bị
-  kết nối + pin.
+- Mỗi 60s đọc thiết bị Bluetooth kết nối + pin qua `CompositeBatteryReader`
+  gồm 3 nguồn theo thứ tự ưu tiên: `IOBluetoothFrameworkReader` →
+  `IORegistryBatteryReader` → `BluetoothBatteryReader` (`system_profiler
+  SPBluetoothDataType -json`, fallback cuối cho thiết bị bị các nguồn kia
+  bỏ sót).
 - Ghi mẫu `{thiết bị, thời điểm, %}` vào
   `~/Library/Application Support/BatteryMenuBar/history.json`, tự xóa mẫu
   cũ hơn 7 ngày.
