@@ -21,7 +21,36 @@ pin còn lại** dựa trên lịch sử sử dụng 7 ngày.
   - Điều khiển trình phát: bài trước/sau, lặp lại (loop), và EQ
     (Web Audio) áp trực tiếp lên video.
 
-## Yêu cầu
+## Cài đặt (người dùng)
+
+Không cần Xcode. Mở **Terminal**, dán đúng 1 dòng dưới đây rồi Enter — nó tự
+tải, cài vào `/Applications` và mở app:
+
+```bash
+curl -fsSL -o /tmp/Battery.zip https://github.com/TieuHoanToLy96/battery/raw/main/dist/Battery.zip && rm -rf /Applications/Battery.app && ditto -x -k /tmp/Battery.zip /Applications && xattr -dr com.apple.quarantine /Applications/Battery.app && open /Applications/Battery.app
+```
+
+Xong là icon pin hiện trên menu bar.
+
+> **Vì sao cần gỡ "quarantine"?** App chưa mua chứng chỉ Apple Developer để
+> notarize, nên macOS mặc định chặn app tải từ mạng ("Battery is damaged" /
+> "nhà phát triển không xác định"). Lệnh `xattr -dr com.apple.quarantine` ở
+> trên gỡ cờ chặn đó. App vẫn được ký ad-hoc cục bộ, không chỉnh sửa gì thêm.
+
+<details>
+<summary>Cài thủ công (không dùng Terminal)</summary>
+
+1. Tải [`dist/Battery.zip`](https://github.com/TieuHoanToLy96/battery/raw/main/dist/Battery.zip) và giải nén.
+2. Kéo `Battery.app` vào thư mục **Applications**.
+3. Lần đầu mở: **chuột phải vào app → Open → Open**.
+4. Nếu macOS báo *"is damaged and can't be opened"* (hay gặp trên máy Apple
+   Silicon), chạy trong Terminal: `xattr -dr com.apple.quarantine /Applications/Battery.app` rồi mở lại.
+</details>
+
+Muốn app **tự chạy khi đăng nhập**? Clone repo và chạy `./install.sh` (tạo
+LaunchAgent), hoặc tự thêm Battery vào *System Settings → General → Login Items*.
+
+## Yêu cầu (để tự build)
 
 - macOS 13+
 - Swift toolchain (Xcode hoặc Command Line Tools)
